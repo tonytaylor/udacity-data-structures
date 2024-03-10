@@ -44,3 +44,33 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+
+def call_matches_area_code(record, area_code):
+    return area_code in record[0]
+
+
+def calls_initiated_in_bangalore(data):
+    return [x for x in data if call_matches_area_code(x, "080")]
+
+
+def call_already_exists(data, incoming, outgoing):
+    for d in data:
+        return True if d[0] == incoming and d[1] == outgoing else False
+
+
+def unique_bangalore_calls(data):
+    output = []
+    for c in data:
+        if not call_already_exists(output, c[0], c[1]):
+            output.append(c)
+
+    return output
+
+
+print("The numbers called by people in Bangalore have codes:")
+bangalore_callers = unique_bangalore_calls(calls_initiated_in_bangalore(calls))
+sorted(calls_initiated_in_bangalore(calls), key=lambda x: x[0])
+for call in bangalore_callers:
+    print(call)
+
